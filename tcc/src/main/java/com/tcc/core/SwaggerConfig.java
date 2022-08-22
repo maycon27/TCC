@@ -1,7 +1,6 @@
 package com.tcc.core;
 
 import com.fasterxml.classmate.TypeResolver;
-import com.tcc.api.exceptionhandler.Problem;
 import com.tcc.api.resource.swagger.PageableModelSwagger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
