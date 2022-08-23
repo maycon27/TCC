@@ -29,7 +29,7 @@ public class TipoEstabelecimentoService {
 
     @Transactional
     public TipoEstabelecimentoDTO criar(TipoEstabelecimentoDTO dto){
-        TipoEstabelecimento tipoEstabelecimento = mapper.toDomainObject(dto);
+        var tipoEstabelecimento = mapper.toDomainObject(dto);
         repository.save(tipoEstabelecimento);
         dto.setId(tipoEstabelecimento.getId());
         return dto;
