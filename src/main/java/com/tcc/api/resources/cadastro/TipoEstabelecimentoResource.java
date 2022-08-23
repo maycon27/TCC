@@ -1,5 +1,6 @@
 package com.tcc.api.resources.cadastro;
 
+import com.tcc.api.dto.NomeDTO;
 import com.tcc.api.dto.TipoEstabelecimentoDTO;
 import com.tcc.api.resources.swagger.cadastro.TipoEstabelecimentoSwagger;
 import com.tcc.doman.event.RecursoCriadoEvent;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/cadastros/tipo-estabelecimento", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,13 +34,15 @@ public class TipoEstabelecimentoResource implements TipoEstabelecimentoSwagger {
     }
 
     @Override
-    public List<TipoEstabelecimentoDTO> pesquisarPorNome(String filter) {
-        return null;
+    @GetMapping("/nome")
+    public List<NomeDTO> pesquisarPorNome(@RequestParam String filter) {
+        return service.BuscarPorNome(filter);
     }
-
+    @GetMapping("/{id}")
     @Override
-    public ResponseEntity<TipoEstabelecimentoDTO> pesquisarPorId(Integer id) {
-        return null;
+    public ResponseEntity<TipoEstabelecimentoDTO> pesquisarPorId(@PathVariable Integer id) {
+        Optional<TipoEstabelecimentoDTO> tipoEstabelecimento = service.buscarPorIdDTO(id);
+        return tipoEstabelecimento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -49,14 +53,16 @@ public class TipoEstabelecimentoResource implements TipoEstabelecimentoSwagger {
         publisher.publishEvent(new RecursoCriadoEvent(this, response, dto.getId()));
         return ResponseEntity.status(HttpStatus.CREATED).body(motoristaSalvo);
     }
-
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
-    public void editar(Integer id, TipoEstabelecimentoDTO dto) {
-
+    public void editar(@PathVariable Integer id,@Valid @RequestBody TipoEstabelecimentoDTO dto) {
+        service.atualizar(id,dto);
     }
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
     @Override
-    public void deletar(Integer id) {
-
+    public void deletar(@PathVariable Integer id) {
+        service.excluir(id);
     }
 }

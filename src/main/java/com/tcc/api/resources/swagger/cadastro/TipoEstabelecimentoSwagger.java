@@ -16,7 +16,7 @@ public interface TipoEstabelecimentoSwagger {
     List<TipoEstabelecimentoDTO> pesquisar();
 
     @ApiOperation("Pesquisa todos os Tipos Estabelecimentos que contenha uma parte ou nome")
-    List<TipoEstabelecimentoDTO> pesquisarPorNome(@ApiParam(value = "nome", example = "venda", required = true) String filter);
+    List<NomeDTO> pesquisarPorNome(@ApiParam(value = "nome", example = "venda", required = true) String filter);
 
     @ApiOperation("Retrona um Tipo Estabelecimento por ID")
     @ApiResponses({

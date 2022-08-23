@@ -171,12 +171,6 @@
             <scope>test</scope>
         </dependency>
 
-
-        <!--        Chronos Emissor-->
-
-
-
-        <!--Me permite criar minhas marcacoes no profile criado classe ChronosApiProperties-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
