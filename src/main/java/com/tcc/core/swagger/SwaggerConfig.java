@@ -51,6 +51,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .ignoredParameterTypes(Principal.class)
                 .directModelSubstitute(Pageable.class, PageableModelSwagger.class)
                 .tags(new Tag("Tipo Estabelecimento", "Recurso para Tipo Estabelecimento"))
+                .tags(new Tag("Estabelecimento", "Recurso para Estabelecimento"))
                 .useDefaultResponseMessages(false)
                 .apiInfo(metaData());
     }

@@ -22,6 +22,7 @@ public class TipoEstabelecimento {
     private Integer id;
     @NotNull
     @Size(max = 50)
+    @Column(name = "NOME")
     private String nome;
 
 }

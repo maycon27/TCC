@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class NomeDTO {
 
-    @ApiModelProperty(example = "3", required = true)
+    @ApiModelProperty(example = "1", required = true)
     @NotNull
     private Integer id;
     @ApiModelProperty(example = "nome", required = true)
