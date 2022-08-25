@@ -1,0 +1,75 @@
+package com.tcc.doman.service;
+
+import com.tcc.api.dto.EstabelecimentoDTO;
+import com.tcc.api.dto.NomeDTO;
+import com.tcc.api.mappers.EstabelecimentoMapper;
+import com.tcc.doman.model.Estabelecimento;
+import com.tcc.doman.repository.EstabelecimentoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+public class EstabelecimentoService {
+
+    @Autowired
+    private EstabelecimentoRepository repository;
+
+    @Autowired
+    private EstabelecimentoMapper mapper;
+
+    public List<EstabelecimentoDTO> buscarTodos(){
+        var estabelecimento = repository.findAll();
+
+        return estabelecimento.stream().map(v -> mapper.toModel(v)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public EstabelecimentoDTO criar(EstabelecimentoDTO dto){
+        var estabelecimento = mapper.toDomainObject(dto);
+        repository.save(estabelecimento);
+        dto.setId(estabelecimento.getId());
+        return dto;
+    }
+    public List<NomeDTO> BuscarPorNome(String filter) {
+
+        return repository.findByNome("%"+filter.toLowerCase()+"%");
+    }
+
+    @Transactional
+    public void atualizar(Integer id, EstabelecimentoDTO dto){
+        Estabelecimento estabelecimento = findById(id);
+
+        mapper.copyToDomainObject(dto,estabelecimento);
+    }
+
+    public Optional<EstabelecimentoDTO> buscarPorIdDTO(Integer id){
+        var estabelecimento = repository.findById(id);
+
+        if(estabelecimento.isEmpty()){
+            throw new EmptyResultDataAccessException(1);
+        }
+
+        var estabelecimentoOPT = Optional.of(mapper.toModel(estabelecimento.get()));
+        return estabelecimentoOPT;
+    }
+
+    @Transactional
+    public void excluir(Integer id) {
+        repository.deleteById(id);
+    }
+
+    private Estabelecimento findById(Integer id) {
+        Optional<Estabelecimento> estabelecimentoSalvo = repository.findById(id);
+        if (estabelecimentoSalvo.isEmpty()) {
+            throw new EmptyResultDataAccessException(1);
+        }
+        return estabelecimentoSalvo.get();
+    }
+
+}
