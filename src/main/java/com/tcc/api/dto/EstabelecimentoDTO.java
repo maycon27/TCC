@@ -32,7 +32,7 @@ public class EstabelecimentoDTO {
     private String complemento;
     @ApiModelProperty(example = "centro")
     private String bairro;
-    @ApiModelProperty(example = "49500-684")
+    @ApiModelProperty(example = "49500684")
     private String cep;
     @ApiModelProperty(example = "Itabaiana")
     private String nomeMunicipio;
