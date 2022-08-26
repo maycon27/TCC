@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/cadastros/estabelecimento", produces = MediaType.APPLICATION_JSON_VALUE)
-public class Estabelecimento implements EstabelecimentoSwagger {
+public class EstabelecimentoResource implements EstabelecimentoSwagger {
 
     @Autowired
     private EstabelecimentoService service;
