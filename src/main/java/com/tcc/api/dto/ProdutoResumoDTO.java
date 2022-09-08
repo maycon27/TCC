@@ -13,7 +13,9 @@ public class ProdutoResumoDTO {
     private Integer id;
     @ApiModelProperty(example = "arroz")
     private String nome;
+    @ApiModelProperty(example = "alimentos")
     private String categoriaProduto;
+    @ApiModelProperty(example = "grãos")
     private String descricao;
     @ApiModelProperty(example = "100.0")
     private BigDecimal preco;
