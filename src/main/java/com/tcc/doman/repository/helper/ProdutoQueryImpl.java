@@ -2,6 +2,8 @@ package com.tcc.doman.repository.helper;
 
 import com.tcc.api.dto.ProdutoResumoDTO;
 import com.tcc.api.resources.swagger.model.PagedModel;
+import com.tcc.doman.model.CategoriaProduto;
+import com.tcc.doman.model.CategoriaProduto_;
 import com.tcc.doman.model.Produto;
 import com.tcc.doman.model.Produto_;
 import com.tcc.doman.service.helper.SpecificationService;
@@ -32,6 +34,8 @@ public class ProdutoQueryImpl implements ProdutoQuery {
 
         Root<Produto> root = criteria.from(Produto.class);
 
+        Join<Produto, CategoriaProduto> categoriaProdutoJoin = root.join(Produto_.CATEGORIA_PRODUTO, JoinType.INNER);
+
         if (specificationFilter != null) {
 
             Predicate predicate = specificationFilter.toPredicate(root, criteria, builder);
@@ -41,6 +45,8 @@ public class ProdutoQueryImpl implements ProdutoQuery {
         criteria.select(builder.construct(ProdutoResumoDTO.class,
                 root.get(Produto_.id),
                 root.get(Produto_.nome),
+                categoriaProdutoJoin.get(CategoriaProduto_.nome),
+                root.get(Produto_.descricao),
                 root.get(Produto_.preco)
         ));
 
