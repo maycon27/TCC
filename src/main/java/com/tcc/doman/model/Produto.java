@@ -57,6 +57,8 @@ public class Produto {
     @ManyToOne(optional = false)
     @NotNull
     private CategoriaProduto categoriaProduto;
+    @Column(name = "IMAGEM_PRODUTO")
+    private String imagemProduto;
 
     public Produto() {
     }

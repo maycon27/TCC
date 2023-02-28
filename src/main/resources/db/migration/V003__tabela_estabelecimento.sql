@@ -1,4 +1,4 @@
-
+drop table if exists ESTABELECIMENTO;
 
 CREATE TABLE ESTABELECIMENTO(
     ID               SERIAL NOT NULL,

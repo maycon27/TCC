@@ -1,5 +1,6 @@
 package com.tcc.doman.service;
 
+import com.tcc.api.dto.CaminhoImagemDTO;
 import com.tcc.api.dto.NomeDTO;
 import com.tcc.api.dto.ProdutoDTO;
 import com.tcc.api.dto.ProdutoResumoDTO;
@@ -12,12 +13,20 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProdutoService {
+
+    private static String caminhoImagem = "D:/Projetos/TCC/Imagens/";
 
     @Autowired
     private ProdutoRepository repository;
@@ -78,5 +87,21 @@ public class ProdutoService {
         return produtosalvo.get();
     }
 
+    public CaminhoImagemDTO uploadImagemProduto(MultipartFile arquivo)  {
+        var caminhoImagemDto = new CaminhoImagemDTO();
+        try {
+            if(!arquivo.isEmpty()) {
+                byte[] bytes = arquivo.getBytes();
+                Path caminho = Paths.get(caminhoImagem+arquivo.getOriginalFilename());
+                Files.write(caminho,bytes);
+                caminhoImagemDto.setCaminhoImagem(caminhoImagem+arquivo.getOriginalFilename());
+            }
+        } catch (IOException e) {
+                throw new RuntimeException(e);
+        }
+
+        return caminhoImagemDto;
+
+    }
 
 }
