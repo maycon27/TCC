@@ -50,6 +50,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .additionalModels(typeResolver.resolve(Problem.class))
                 .ignoredParameterTypes(Principal.class)
                 .directModelSubstitute(Pageable.class, PageableModelSwagger.class)
+                .securitySchemes(Collections.singletonList(securityScheme()))
+                .securityContexts(Collections.singletonList(securityContext()))
                 .tags(new Tag("Tipo Estabelecimento", "Recurso para Tipo Estabelecimento"))
                 .tags(new Tag("Estabelecimento", "Recurso para Estabelecimento"))
                 .tags(new Tag("Cliente", "Recurso para Cliente"))
@@ -59,6 +61,34 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .apiInfo(metaData());
     }
 
+    private SecurityScheme securityScheme() {
+        return new OAuthBuilder()
+                .name("ChronosDFE")
+                .grantTypes(grantTypes())
+                .scopes(scopes())
+                .build();
+    }
+
+    private SecurityContext securityContext() {
+        var securityReference = SecurityReference.builder()
+                .reference("ChronosDFE")
+                .scopes(scopes().toArray(new AuthorizationScope[0]))
+                .build();
+
+        return SecurityContext.builder()
+                .securityReferences(Arrays.asList(securityReference))
+                .forPaths(PathSelectors.any())
+                .build();
+    }
+
+    private List<GrantType> grantTypes() {
+        return Arrays.asList(new ResourceOwnerPasswordCredentialsGrant("/oauth/token"));
+    }
+
+    private List<AuthorizationScope> scopes() {
+        return Arrays.asList(new AuthorizationScope("read", "Acesso de leitura"),
+                new AuthorizationScope("write", "Acesso de escrita"));
+    }
 
     private List<ResponseMessage> globalGetResponseMessages() {
         return Arrays.asList(
