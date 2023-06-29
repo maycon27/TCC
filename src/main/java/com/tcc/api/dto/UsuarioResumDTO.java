@@ -15,6 +15,9 @@ public class UsuarioResumDTO {
     @ApiModelProperty(example = "jose")
     private String nome;
 
+    public UsuarioResumDTO(){
+
+    }
     public UsuarioResumDTO(Integer id, String login, String nome) {
         this.id = id;
         this.login = login;

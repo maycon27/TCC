@@ -33,7 +33,6 @@ public class Usuario {
     @NotNull
     private String nome;
     @Column(name = "role")
-    @NotNull
     private String role;
 
 
