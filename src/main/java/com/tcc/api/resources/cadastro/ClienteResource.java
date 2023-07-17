@@ -47,14 +47,6 @@ public class ClienteResource implements ClienteSwagger {
         return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    @Override
-    public ResponseEntity<ClienteDTO> criar(@Valid @RequestBody ClienteDTO dto, HttpServletResponse response) {
-        ClienteDTO clienteSalvo = service.criar(dto);
-        publisher.publishEvent(new RecursoCriadoEvent(this, response, dto.getId()));
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteSalvo);
-    }
-
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override

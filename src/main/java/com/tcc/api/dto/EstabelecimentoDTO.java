@@ -42,4 +42,8 @@ public class EstabelecimentoDTO {
     private String nomePais;
     @NotNull
     private NomeDTO tipoEstabelecimento;
+    @ApiModelProperty(example = "12345678")
+    private String senha;
+    private UsuarioResumDTO usuario;
+
 }

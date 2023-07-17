@@ -57,6 +57,8 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .tags(new Tag("Cliente", "Recurso para Cliente"))
                 .tags(new Tag("Categoria Produto", "Recurso para Categoria de Produtos"))
                 .tags(new Tag("Produto", "Recurso para Produtos"))
+                .tags(new Tag("Venda", "Recurso para Vendas"))
+                .tags(new Tag("End Points Publicos", "Recursos Publicos"))
                 .useDefaultResponseMessages(false)
                 .apiInfo(metaData());
     }
