@@ -7,6 +7,7 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
 
+
     ClienteDTO toModel(Cliente cliente);
 
     @InheritInverseConfiguration

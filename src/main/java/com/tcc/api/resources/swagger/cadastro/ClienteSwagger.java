@@ -24,13 +24,6 @@ public interface ClienteSwagger {
     })
     ResponseEntity<ClienteDTO> pesquisarPorId(@ApiParam(value = "id", example = "1", required = true) Integer id);
 
-    @ApiOperation("Cria um novo cliente")
-    @ApiResponses({
-            @ApiResponse(code = 201, message = "cliente cadastrado"),
-    })
-    ResponseEntity<ClienteDTO> criar(
-            @ApiParam(name = "corpo", value = "Representação de uma novo cliente", required = true) ClienteDTO dto,
-            HttpServletResponse response);
 
     @ApiOperation("Atualiza um cliente")
     @ApiResponses({

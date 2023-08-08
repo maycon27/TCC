@@ -1,5 +1,6 @@
 package com.tcc.api.resources.cadastro;
 
+import com.tcc.api.dto.CaminhoImagemDTO;
 import com.tcc.api.dto.NomeDTO;
 import com.tcc.api.dto.ProdutoDTO;
 import com.tcc.api.dto.ProdutoResumoDTO;
@@ -16,9 +17,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,4 +72,9 @@ public class ProdutoRecource implements ProdutoSwagger {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Integer id){ service.excluir(id);}
+
+    @PutMapping(value = "/uploadImagem")
+    public CaminhoImagemDTO uploadCertificado(@RequestPart() MultipartFile arquivo) {
+        return service.uploadImagemProduto(arquivo);
+    }
 }

@@ -36,6 +36,7 @@ public class ProdutoDTO {
     private SimNao ativo;
     @ApiModelProperty(example = "DISPONIVEL")
     private DiponivelIndisponivel situacao;
+    private String imagemProduto;
     @NotNull
     private NomeDTO categoriaProduto;
 }

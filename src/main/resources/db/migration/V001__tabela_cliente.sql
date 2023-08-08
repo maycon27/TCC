@@ -1,4 +1,16 @@
+drop table if exists USUARIO;
+drop table if exists CLIENTES;
 
+
+CREATE TABLE USUARIO
+(
+    ID         SERIAL  NOT NULL,
+    NOME       VARCHAR(60),
+    LOGIN      VARCHAR(60) UNIQUE,
+    SENHA      VARCHAR(60),
+    ROLE       varchar(50),
+    PRIMARY KEY (ID)
+);
 
 CREATE TABLE CLIENTES
 (
@@ -16,5 +28,8 @@ CREATE TABLE CLIENTES
     UF               CHAR(2),
     NOME_PAIS        VARCHAR(60),
     DATA_NASCIMENTO  TIMESTAMP,
-    PRIMARY KEY (ID)
+    ID_USUARIO INTEGER NOT NULL,
+
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ID_USUARIO) REFERENCES USUARIO(ID)
 );

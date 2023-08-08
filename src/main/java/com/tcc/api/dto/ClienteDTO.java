@@ -1,7 +1,9 @@
 package com.tcc.api.dto;
 
+import com.tcc.doman.model.Usuario;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 ;
@@ -10,6 +12,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ClienteDTO {
 
     private Integer id;
@@ -43,4 +46,7 @@ public class ClienteDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(example = "1997-03-01")
     private LocalDate dataNascimento;
+    @ApiModelProperty(example = "12345678")
+    private String senha;
+    private UsuarioResumDTO usuario;
 }

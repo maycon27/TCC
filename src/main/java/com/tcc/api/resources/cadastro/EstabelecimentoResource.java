@@ -24,9 +24,6 @@ public class EstabelecimentoResource implements EstabelecimentoSwagger {
     @Autowired
     private EstabelecimentoService service;
 
-    @Autowired
-    private ApplicationEventPublisher publisher;
-
     @GetMapping
     @Override
     public List<EstabelecimentoDTO> pesquisar() {
@@ -44,14 +41,6 @@ public class EstabelecimentoResource implements EstabelecimentoSwagger {
     public ResponseEntity<EstabelecimentoDTO> pesquisarPorId(@PathVariable Integer id) {
         Optional<EstabelecimentoDTO> estabelecimento = service.buscarPorIdDTO(id);
         return estabelecimento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    @Override
-    public ResponseEntity<EstabelecimentoDTO> criar(@Valid @RequestBody EstabelecimentoDTO dto, HttpServletResponse response) {
-        EstabelecimentoDTO estabelecimentoSalvo = service.criar(dto);
-        publisher.publishEvent(new RecursoCriadoEvent(this, response, dto.getId()));
-        return ResponseEntity.status(HttpStatus.CREATED).body(estabelecimentoSalvo);
     }
 
     @PutMapping("/{id}")

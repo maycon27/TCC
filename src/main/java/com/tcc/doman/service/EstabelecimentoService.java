@@ -4,9 +4,12 @@ import com.tcc.api.dto.EstabelecimentoDTO;
 import com.tcc.api.dto.NomeDTO;
 import com.tcc.api.mappers.EstabelecimentoMapper;
 import com.tcc.doman.model.Estabelecimento;
+import com.tcc.doman.model.Usuario;
 import com.tcc.doman.repository.EstabelecimentoRepository;
+import com.tcc.doman.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +26,9 @@ public class EstabelecimentoService {
     @Autowired
     private EstabelecimentoMapper mapper;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     public List<EstabelecimentoDTO> buscarTodos(){
         var estabelecimento = repository.findAll();
 
@@ -32,8 +38,21 @@ public class EstabelecimentoService {
     @Transactional
     public EstabelecimentoDTO criar(EstabelecimentoDTO dto){
         var estabelecimento = mapper.toDomainObject(dto);
+        var usuario = new Usuario();
+
+        usuario.setNome(dto.getNome());
+        usuario.setLogin(dto.getEmail());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        usuario.setSenha(encoder.encode(dto.getSenha()));
+        var usuarioSalvo = usuarioRepository.save(usuario);
+
+
+        estabelecimento.getUsuario().setId(usuarioSalvo.getId());
         repository.save(estabelecimento);
         dto.setId(estabelecimento.getId());
+        dto.getUsuario().setNome(usuarioSalvo.getNome());
+        dto.getUsuario().setLogin(usuario.getLogin());
+        dto.getUsuario().setId(usuario.getId());
         return dto;
     }
     public List<NomeDTO> BuscarPorNome(String filter) {
