@@ -63,5 +63,8 @@ public class Cliente {
     private String nomePais;
     @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
-
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    @NotNull
+    private Usuario usuario;
 }

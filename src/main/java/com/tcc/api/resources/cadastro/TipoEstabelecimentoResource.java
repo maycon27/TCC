@@ -33,11 +33,6 @@ public class TipoEstabelecimentoResource implements TipoEstabelecimentoSwagger {
         return service.buscarTodos();
     }
 
-    @Override
-    @GetMapping("/nome")
-    public List<NomeDTO> pesquisarPorNome(@RequestParam String filter) {
-        return service.BuscarPorNome(filter);
-    }
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<TipoEstabelecimentoDTO> pesquisarPorId(@PathVariable Integer id) {

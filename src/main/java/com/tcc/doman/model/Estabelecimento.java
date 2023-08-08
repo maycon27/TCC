@@ -66,4 +66,8 @@ public class Estabelecimento {
     @ManyToOne(optional = false)
     @NotNull
     private TipoEstabelecimento tipoEstabelecimento;
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    @NotNull
+    private Usuario usuario;
 }

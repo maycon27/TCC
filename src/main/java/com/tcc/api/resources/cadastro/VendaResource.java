@@ -4,6 +4,7 @@ import com.tcc.api.dto.ProdutoDTO;
 import com.tcc.api.dto.ProdutoResumoDTO;
 import com.tcc.api.dto.VendaDTO;
 import com.tcc.api.dto.VendaResumoDTO;
+import com.tcc.api.resources.swagger.cadastro.VendaSwagger;
 import com.tcc.api.resources.swagger.model.PagedModel;
 import com.tcc.doman.event.RecursoCriadoEvent;
 import com.tcc.doman.model.enums.SituacaoVenda;
@@ -24,7 +25,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/cadastros/venda", produces = MediaType.APPLICATION_JSON_VALUE)
-public class VendaResource {
+public class VendaResource implements VendaSwagger {
 
     @Autowired
     private VendaService service;
@@ -40,7 +41,7 @@ public class VendaResource {
     }
 
     @PostMapping
-    public ResponseEntity<VendaDTO> criar(@Valid @RequestBody VendaDTO dto, HttpServletResponse response) {
+    public ResponseEntity<VendaDTO> salvar(@Valid @RequestBody VendaDTO dto, HttpServletResponse response) {
         VendaDTO vendaSalva = service.criar(dto);
 
         publisher.publishEvent(new RecursoCriadoEvent(this, response, dto.getId()));

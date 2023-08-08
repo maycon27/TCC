@@ -3,11 +3,15 @@ package com.tcc.doman.service;
 
 import com.tcc.api.dto.ClienteDTO;
 import com.tcc.api.dto.NomeDTO;
+import com.tcc.api.dto.UsuarioDTO;
 import com.tcc.api.mappers.ClienteMapper;
 import com.tcc.doman.model.Cliente;
+import com.tcc.doman.model.Usuario;
 import com.tcc.doman.repository.ClienteRespository;
+import com.tcc.doman.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,9 @@ public class ClienteService {
     private ClienteRespository repository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private ClienteMapper mapper;
 
     public List<ClienteDTO> buscarTodos(){
@@ -33,8 +40,20 @@ public class ClienteService {
     @Transactional
     public ClienteDTO criar(ClienteDTO dto){
         var cliente = mapper.toDomainObject(dto);
+        var usuario = new Usuario();
+
+        usuario.setNome(dto.getNome());
+        usuario.setLogin(dto.getEmail());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        usuario.setSenha(encoder.encode(dto.getSenha()));
+        var usuarioSalvo = usuarioRepository.save(usuario);
+
+        cliente.getUsuario().setId(usuarioSalvo.getId());
         repository.save(cliente);
         dto.setId(cliente.getId());
+        dto.getUsuario().setNome(usuarioSalvo.getNome());
+        dto.getUsuario().setLogin(usuario.getLogin());
+        dto.getUsuario().setId(usuario.getId());
         return dto;
     }
 

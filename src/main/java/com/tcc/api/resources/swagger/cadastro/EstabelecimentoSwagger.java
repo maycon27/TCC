@@ -26,14 +26,6 @@ public interface EstabelecimentoSwagger {
     })
     ResponseEntity<EstabelecimentoDTO> pesquisarPorId(@ApiParam(value = "id", example = "1", required = true) Integer id);
 
-    @ApiOperation("Cria um novo Estabelecimento")
-    @ApiResponses({
-            @ApiResponse(code = 201, message = "Estabelecimento cadastrado"),
-    })
-    ResponseEntity<EstabelecimentoDTO> criar(
-            @ApiParam(name = "corpo", value = "Representação de uma novo Estabelecimento", required = true) EstabelecimentoDTO dto,
-            HttpServletResponse response);
-
     @ApiOperation("Atualiza um Estabelecimento")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Estabelecimento atualizado"),

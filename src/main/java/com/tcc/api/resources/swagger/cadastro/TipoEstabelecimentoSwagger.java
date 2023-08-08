@@ -15,9 +15,6 @@ public interface TipoEstabelecimentoSwagger {
     @ApiOperation("Retorna todos os Tipos Estabelecimentos")
     List<TipoEstabelecimentoDTO> pesquisar();
 
-    @ApiOperation("Pesquisa todos os Tipos Estabelecimentos que contenha uma parte ou nome")
-    List<NomeDTO> pesquisarPorNome(@ApiParam(value = "nome", example = "venda", required = true) String filter);
-
     @ApiOperation("Retrona um Tipo Estabelecimento por ID")
     @ApiResponses({
             @ApiResponse(code = 400, message = "ID do Tipo Estabelecimento invalido", response = Problem.class),
