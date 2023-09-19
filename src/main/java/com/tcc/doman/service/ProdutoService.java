@@ -26,7 +26,7 @@ import java.util.Optional;
 @Service
 public class ProdutoService {
 
-    private static String caminhoImagem = "D:/Projetos/TCC/Imagens/";
+    private static String caminhoImagem = "D:/Projetos/tcc front/frontTCC/src/assets/";
 
     @Autowired
     private ProdutoRepository repository;
