@@ -47,7 +47,8 @@ public class ProdutoQueryImpl implements ProdutoQuery {
                 root.get(Produto_.nome),
                 categoriaProdutoJoin.get(CategoriaProduto_.nome),
                 root.get(Produto_.descricao),
-                root.get(Produto_.preco)
+                root.get(Produto_.preco),
+                root.get(Produto_.imagemProduto)
         ));
 
         ordenarRegistros(criteria, builder, root, pageable);

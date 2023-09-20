@@ -19,6 +19,7 @@ public class ProdutoResumoDTO {
     private String descricao;
     @ApiModelProperty(example = "100.0")
     private BigDecimal preco;
+    private String imagemProduto;
 
 
 }
