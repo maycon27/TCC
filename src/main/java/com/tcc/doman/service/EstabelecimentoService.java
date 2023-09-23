@@ -2,6 +2,7 @@ package com.tcc.doman.service;
 
 import com.tcc.api.dto.EstabelecimentoDTO;
 import com.tcc.api.dto.NomeDTO;
+import com.tcc.api.dto.UsuarioResumDTO;
 import com.tcc.api.mappers.EstabelecimentoMapper;
 import com.tcc.doman.model.Estabelecimento;
 import com.tcc.doman.model.Usuario;
@@ -44,11 +45,13 @@ public class EstabelecimentoService {
         usuario.setLogin(dto.getEmail());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         usuario.setSenha(encoder.encode(dto.getSenha()));
+        usuario.setRole("Estabelecimento");
         var usuarioSalvo = usuarioRepository.save(usuario);
 
-
+        estabelecimento.setUsuario(new Usuario());
         estabelecimento.getUsuario().setId(usuarioSalvo.getId());
         repository.save(estabelecimento);
+        dto.setUsuario(new UsuarioResumDTO());
         dto.setId(estabelecimento.getId());
         dto.getUsuario().setNome(usuarioSalvo.getNome());
         dto.getUsuario().setLogin(usuario.getLogin());
