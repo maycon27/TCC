@@ -15,6 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     Optional<Usuario> findByLogin(String login);
 
+    Optional<Usuario> findById(Integer id);
+
     @Query("select  new com.tcc.api.dto.UsuarioResumDTO(u.id,u.login,u.nome) from Usuario u")
     List<UsuarioResumDTO> findAllResum();
 

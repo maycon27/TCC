@@ -6,13 +6,17 @@ import com.tcc.api.dto.NomeDTO;
 import com.tcc.api.dto.UsuarioDTO;
 import com.tcc.api.dto.UsuarioResumDTO;
 import com.tcc.api.mappers.ClienteMapper;
+import com.tcc.core.security.UsuarioSistema;
 import com.tcc.doman.model.Cliente;
 import com.tcc.doman.model.Usuario;
 import com.tcc.doman.repository.ClienteRespository;
 import com.tcc.doman.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

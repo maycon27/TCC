@@ -3,6 +3,8 @@ package com.tcc.core.token;
 
 
 import com.tcc.core.security.UsuarioSistema;
+import com.tcc.doman.service.UsurioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -15,6 +17,8 @@ import java.util.Map;
 public class CustomTokenEnhancer implements TokenEnhancer {
 
 
+    @Autowired
+    private UsurioService service;
 
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
@@ -28,6 +32,8 @@ public class CustomTokenEnhancer implements TokenEnhancer {
 
     private void addCustomTokenPasswordFlow(OAuth2AccessToken token, OAuth2Authentication authentication) {
         UsuarioSistema usuarioSistema = (UsuarioSistema) authentication.getPrincipal();
+
+        service.recuperarId(usuarioSistema.getUsuario().getId());
 
         Map<String, Object> addInfo = new HashMap<>();
         addInfo.put("id", usuarioSistema.getUsuario().getId());
