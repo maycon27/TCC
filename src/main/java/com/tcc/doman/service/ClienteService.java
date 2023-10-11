@@ -70,6 +70,11 @@ public class ClienteService {
         return repository.findByNome("%"+filter.toLowerCase()+"%");
     }
 
+    public NomeDTO BuscarPorUsuario(Integer idUsuario) {
+
+        return repository.findByUsuario(idUsuario);
+    }
+
     @Transactional
     public void atualizar(Integer id, ClienteDTO dto){
         Cliente cliente = findById(id);

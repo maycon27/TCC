@@ -47,6 +47,11 @@ public class ClienteResource implements ClienteSwagger {
         return cliente.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/usuario/{idUsuario}")
+    public NomeDTO pesquisarPorUsuario(@PathVariable Integer idUsuario) {
+        return service.BuscarPorUsuario(idUsuario);
+    }
+
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Override
