@@ -3,10 +3,11 @@ package com.tcc.api.dto;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 @Getter
-@AllArgsConstructor
+@Setter
 public class ProdutoResumoDTO {
 
     @ApiModelProperty(example = "1")
@@ -21,5 +22,20 @@ public class ProdutoResumoDTO {
     private BigDecimal preco;
     private String imagemProduto;
 
+    public ProdutoResumoDTO(Integer id, String nome, String categoriaProduto, String descricao, BigDecimal preco) {
+        this.id = id;
+        this.nome = nome;
+        this.categoriaProduto = categoriaProduto;
+        this.descricao = descricao;
+        this.preco = preco;
+    }
 
+    public ProdutoResumoDTO(Integer id, String nome, String categoriaProduto, String descricao, BigDecimal preco, String imagemProduto) {
+        this.id = id;
+        this.nome = nome;
+        this.categoriaProduto = categoriaProduto;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.imagemProduto = imagemProduto;
+    }
 }

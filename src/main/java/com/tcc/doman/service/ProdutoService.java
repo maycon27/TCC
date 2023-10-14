@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,16 @@ public class ProdutoService {
 
     public List<NomeDTO> findByNome(String filter){
         return repository.findByNome("%" + filter.toLowerCase() + "%");
+    }
+
+    public List<ProdutoResumoDTO> findByEstabelecimento(Integer idEstabelecimento){
+        var produto = repository.findByEstabelecimentoId(idEstabelecimento);
+       List<ProdutoResumoDTO> retorno = new ArrayList<>();
+       produto.forEach(result -> {
+           retorno.add(new ProdutoResumoDTO(result.getId(), result.getNome(), result.getCategoriaProduto().getNome(), result.getDescricao(), result.getPreco()));
+       });
+
+       return retorno;
     }
 
     public Optional<ProdutoDTO> buscarPorIdDTO(Integer id){

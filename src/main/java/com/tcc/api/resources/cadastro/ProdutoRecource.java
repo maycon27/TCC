@@ -54,6 +54,12 @@ public class ProdutoRecource implements ProdutoSwagger {
         return  produto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("estabelecimento/{id}")
+    public List<ProdutoResumoDTO> findByEstabelecimento(@PathVariable Integer id){
+        return service.findByEstabelecimento(id);
+
+    }
+
     @PostMapping
     @Override
     public ResponseEntity<ProdutoDTO> salvar(@Valid @RequestBody ProdutoDTO dto, HttpServletResponse response) {

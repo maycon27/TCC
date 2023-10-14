@@ -63,6 +63,11 @@ public class EstabelecimentoService {
         return repository.findByNome("%"+filter.toLowerCase()+"%");
     }
 
+    public NomeDTO BuscarPorUsuario(Integer idUsuario) {
+
+        return repository.findByUsuario(idUsuario);
+    }
+
     @Transactional
     public void atualizar(Integer id, EstabelecimentoDTO dto){
         Estabelecimento estabelecimento = findById(id);

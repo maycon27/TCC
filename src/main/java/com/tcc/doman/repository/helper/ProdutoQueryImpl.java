@@ -2,10 +2,7 @@ package com.tcc.doman.repository.helper;
 
 import com.tcc.api.dto.ProdutoResumoDTO;
 import com.tcc.api.resources.swagger.model.PagedModel;
-import com.tcc.doman.model.CategoriaProduto;
-import com.tcc.doman.model.CategoriaProduto_;
-import com.tcc.doman.model.Produto;
-import com.tcc.doman.model.Produto_;
+import com.tcc.doman.model.*;
 import com.tcc.doman.service.helper.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
@@ -17,6 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProdutoQueryImpl implements ProdutoQuery {
     @PersistenceContext
@@ -61,7 +60,6 @@ public class ProdutoQueryImpl implements ProdutoQuery {
 
         return new PagedModel<>(page, query.getResultList());
     }
-
     private void ordenarRegistros(CriteriaQuery<?> criteria, CriteriaBuilder builder, Root<?> root, Pageable pageable) {
 
         Order ord;

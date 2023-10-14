@@ -36,6 +36,12 @@ public class EstabelecimentoResource implements EstabelecimentoSwagger {
         return service.BuscarPorNome(filter);
     }
 
+    @GetMapping("/usuario/{idUsuario}")
+    public NomeDTO pesquisarPorUsuario(@PathVariable Integer idUsuario) {
+        return service.BuscarPorUsuario(idUsuario);
+    }
+
+
     @GetMapping("/{id}")
     @Override
     public ResponseEntity<EstabelecimentoDTO> pesquisarPorId(@PathVariable Integer id) {

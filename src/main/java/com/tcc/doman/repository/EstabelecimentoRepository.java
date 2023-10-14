@@ -11,4 +11,7 @@ public interface EstabelecimentoRepository extends JpaRepository<Estabelecimento
 
     @Query("select new com.tcc.api.dto.NomeDTO(e.id,e.nome) from Estabelecimento e where lower(e.nome) like ?1")
     List<NomeDTO> findByNome(String nome);
+
+    @Query("select new com.tcc.api.dto.NomeDTO(c.id,c.nome) from Estabelecimento c where c.usuario.id = ?1")
+    NomeDTO findByUsuario(Integer IdUsuario);
 }

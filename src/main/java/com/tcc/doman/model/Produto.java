@@ -59,6 +59,10 @@ public class Produto {
     private CategoriaProduto categoriaProduto;
     @Column(name = "IMAGEM_PRODUTO")
     private String imagemProduto;
+    @JoinColumn(name = "ID_ESTABELECIMENTO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    @NotNull
+    private Estabelecimento estabelecimento;
 
     public Produto() {
     }

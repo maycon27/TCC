@@ -39,4 +39,7 @@ public class ProdutoDTO {
     private String imagemProduto;
     @NotNull
     private NomeDTO categoriaProduto;
+
+    @NotNull
+    private NomeDTO estabelecimento;
 }
