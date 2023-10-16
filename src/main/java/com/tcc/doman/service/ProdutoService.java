@@ -1,9 +1,6 @@
 package com.tcc.doman.service;
 
-import com.tcc.api.dto.CaminhoImagemDTO;
-import com.tcc.api.dto.NomeDTO;
-import com.tcc.api.dto.ProdutoDTO;
-import com.tcc.api.dto.ProdutoResumoDTO;
+import com.tcc.api.dto.*;
 import com.tcc.api.mappers.ProdutoMapper;
 import com.tcc.api.resources.swagger.model.PagedModel;
 import com.tcc.doman.model.Produto;
@@ -77,6 +74,10 @@ public class ProdutoService {
        });
 
        return retorno;
+    }
+
+    public List<ProdutoVendaDTO> buscarProdutosVendidos(Integer idEstabelecimento){
+        return repository.consultarProdutosVendidos(idEstabelecimento);
     }
 
     public Optional<ProdutoDTO> buscarPorIdDTO(Integer id){

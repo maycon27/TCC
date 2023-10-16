@@ -1,9 +1,6 @@
 package com.tcc.api.resources.cadastro;
 
-import com.tcc.api.dto.CaminhoImagemDTO;
-import com.tcc.api.dto.NomeDTO;
-import com.tcc.api.dto.ProdutoDTO;
-import com.tcc.api.dto.ProdutoResumoDTO;
+import com.tcc.api.dto.*;
 import com.tcc.api.resources.swagger.cadastro.ProdutoSwagger;
 import com.tcc.api.resources.swagger.model.PagedModel;
 import com.tcc.doman.event.RecursoCriadoEvent;
@@ -57,6 +54,12 @@ public class ProdutoRecource implements ProdutoSwagger {
     @GetMapping("estabelecimento/{id}")
     public List<ProdutoResumoDTO> findByEstabelecimento(@PathVariable Integer id){
         return service.findByEstabelecimento(id);
+
+    }
+
+    @GetMapping("vendidos/estabelecimento/{id}")
+    public List<ProdutoVendaDTO> buscarProdutosVendidos(@PathVariable Integer id){
+        return service.buscarProdutosVendidos(id);
 
     }
 
