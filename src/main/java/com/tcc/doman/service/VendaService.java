@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.bind.ValidationException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -61,6 +63,16 @@ public class VendaService {
         mapper.copyToDomainObject(dto, vendaSalva);
 
         repository.save(vendaSalva);
+    }
+
+    public List<VendaResumoDTO> consultarVendaCliente(Integer idCliente){
+        var venda = repository.findVendaByClienteId(idCliente);
+        List<VendaResumoDTO> retorno = new ArrayList<>();
+        venda.forEach(result -> {
+            retorno.add(new VendaResumoDTO(result.getId(), result.getDataVenda(), result.getValorTotal(), result.getStatus(), result.getSituacao(), result.getCliente().getNome()));
+        });
+
+        return  retorno;
     }
 
     public Optional<VendaDTO> buscarPorId(Integer id){

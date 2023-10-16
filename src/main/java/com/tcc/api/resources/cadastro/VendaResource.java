@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/cadastros/venda", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,6 +40,13 @@ public class VendaResource implements VendaSwagger {
 
         return service.findAll(search,pageable);
     }
+
+    @GetMapping("cliente/{id}")
+    public List<VendaResumoDTO> findByEstabelecimento(@PathVariable Integer id){
+        return service.consultarVendaCliente(id);
+
+    }
+
 
     @PostMapping
     public ResponseEntity<VendaDTO> salvar(@Valid @RequestBody VendaDTO dto, HttpServletResponse response) {

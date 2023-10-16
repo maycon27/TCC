@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
-@AllArgsConstructor
 public class VendaResumoDTO {
 
     private Integer id;
@@ -23,5 +22,14 @@ public class VendaResumoDTO {
 
     private SituacaoVenda situacao;
 
-    private String NomeCliente;
+    private String nomeCliente;
+
+    public VendaResumoDTO(Integer id, LocalDate dataVenda, BigDecimal valorTotal, StatusVenda status, SituacaoVenda situacao, String nomeCliente) {
+        this.id = id;
+        this.dataVenda = dataVenda;
+        this.valorTotal = valorTotal;
+        this.status = status;
+        this.situacao = situacao;
+        this.nomeCliente = nomeCliente;
+    }
 }
