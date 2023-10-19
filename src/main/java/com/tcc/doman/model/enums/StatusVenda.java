@@ -5,7 +5,7 @@ import com.tcc.core.config.types.CodeStringEnum;
 public enum StatusVenda implements CodeStringEnum {
 
     PREPARAR("PREPARAR"),
-    SEPARADO("SEPRADO"),
+    SEPARADO("SEPARADO"),
     COLETADO("COLETADO"),
     ENTREGUE("ENTREGUE");
 

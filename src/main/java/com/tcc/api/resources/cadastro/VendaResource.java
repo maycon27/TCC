@@ -71,8 +71,8 @@ public class VendaResource implements VendaSwagger {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Integer id){ service.excluir(id);}
 
-    @PutMapping("statusVenda/{id}")
-    public  void alterarStatusVenda(@PathVariable Integer id, @RequestParam StatusVenda statusVenda){
+    @PutMapping("statusVenda")
+    public  void alterarStatusVenda(@RequestParam Integer id, @RequestParam StatusVenda statusVenda){
         service.alterarStatusVenda(statusVenda, id);
     }
 
