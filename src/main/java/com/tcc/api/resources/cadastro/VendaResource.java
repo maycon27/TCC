@@ -1,9 +1,6 @@
 package com.tcc.api.resources.cadastro;
 
-import com.tcc.api.dto.ProdutoDTO;
-import com.tcc.api.dto.ProdutoResumoDTO;
-import com.tcc.api.dto.VendaDTO;
-import com.tcc.api.dto.VendaResumoDTO;
+import com.tcc.api.dto.*;
 import com.tcc.api.resources.swagger.cadastro.VendaSwagger;
 import com.tcc.api.resources.swagger.model.PagedModel;
 import com.tcc.doman.event.RecursoCriadoEvent;
@@ -45,6 +42,11 @@ public class VendaResource implements VendaSwagger {
     public List<VendaResumoDTO> findByEstabelecimento(@PathVariable Integer id){
         return service.consultarVendaCliente(id);
 
+    }
+
+    @GetMapping("consultar")
+    public List<VendaResuminda> consultar(){
+        return service.consultarVendas();
     }
 
 

@@ -2,6 +2,7 @@ package com.tcc.doman.service;
 
 import com.tcc.api.dto.ProdutoResumoDTO;
 import com.tcc.api.dto.VendaDTO;
+import com.tcc.api.dto.VendaResuminda;
 import com.tcc.api.dto.VendaResumoDTO;
 import com.tcc.api.mappers.VendaMapper;
 import com.tcc.api.resources.swagger.model.PagedModel;
@@ -36,6 +37,11 @@ public class VendaService {
     public PagedModel<VendaResumoDTO> findAll(String search , Pageable pageable){
         return repository.findAll(search,pageable);
     }
+
+    public List<VendaResuminda> consultarVendas(){
+        return repository.consultarVendas();
+    }
+
     @Transactional
     public VendaDTO criar(VendaDTO dto){
         var venda = mapper.toDomainObject(dto);
