@@ -14,10 +14,11 @@ public interface VendaRepository extends JpaRepository<Venda,Integer>, VendaQuer
 
     @Query(value = "SELECT new com.tcc.api.dto.VendaResuminda(v.id, v.dataVenda, v.valorTotal, e.nome, v.situacao, c.nome)" +
             " FROM Venda v " +
-            " INNER JOIN ItensVenda iv ON (v.id = iv.produto.id) " +
-            " INNER JOIN Produto p ON (iv.produto.id = p.id) " +
-            " INNER JOIN Estabelecimento e ON (p.estabelecimento.id = e.id) " +
-            " INNER JOIN Cliente c ON (c.id = v.cliente.id)")
+            " LEFT JOIN ItensVenda iv ON (v.id = iv.venda.id) " +
+            " LEFT JOIN Produto p ON (iv.produto.id = p.id) " +
+            " LEFT JOIN Estabelecimento e ON (iv.produto.estabelecimento.id = e.id) " +
+            " LEFT JOIN Cliente c ON (c.id = v.cliente.id) " +
+            " group by v.id, v.dataVenda, v.valorTotal,  v.situacao, c.nome, e.nome")
     List<VendaResuminda> consultarVendas();
 
 }
