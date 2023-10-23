@@ -24,12 +24,15 @@ public class VendaResuminda {
 
     private String nomeCliente;
 
-    public VendaResuminda(Integer id, LocalDate dataVenda, BigDecimal valorTotal, String nomeEstabelecimento, SituacaoVenda situacao, String nomeCliente) {
+    private String nomeProduto;
+
+    public VendaResuminda(Integer id, LocalDate dataVenda, BigDecimal valorTotal, String nomeEstabelecimento, SituacaoVenda situacao, String nomeCliente, String nomeProduto ) {
         this.id = id;
         this.dataVenda = dataVenda;
         this.valorTotal = valorTotal;
         this.nomeEstabelecimento = nomeEstabelecimento;
         this.situacao = situacao;
         this.nomeCliente = nomeCliente;
+        this.nomeProduto = nomeProduto;
     }
 }
