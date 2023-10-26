@@ -19,11 +19,10 @@ public interface ProdutoRepository extends JpaRepository<Produto,Integer>, Produ
 
     List<Produto> findByEstabelecimentoId(Integer id);
 
-    @Query(value = "select new  com.tcc.api.dto.ProdutoVendaDTO(p.nome, sum(iv.quantidade), c.nome) " +
+    @Query(value = "select new  com.tcc.api.dto.ProdutoVendaDTO(v.id ,p.nome, iv.quantidade, c.nome, v.dataVenda, v.valorTotal) " +
             " from Produto p  inner join ItensVenda iv on (p.id = iv.produto.id) " +
             " inner join Venda  v on (iv.venda.id = v.id) " +
             " inner join Cliente c on (c.id = v.cliente.id) " +
-            " where p.estabelecimento.id = :idEstabelecimento " +
-            " group by p.nome,c.nome")
+            " where p.estabelecimento.id = :idEstabelecimento ")
     List<ProdutoVendaDTO> consultarProdutosVendidos(Integer idEstabelecimento);
 }

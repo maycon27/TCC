@@ -42,6 +42,10 @@ public class VendaService {
         return repository.consultarVendas();
     }
 
+    public List<VendaResuminda> consultarVendasColetar(){
+        return repository.consultarVendasColetar();
+    }
+
     @Transactional
     public VendaDTO criar(VendaDTO dto){
         var venda = mapper.toDomainObject(dto);
@@ -73,12 +77,8 @@ public class VendaService {
 
     public List<VendaResumoDTO> consultarVendaCliente(Integer idCliente){
         var venda = repository.findVendaByClienteId(idCliente);
-        List<VendaResumoDTO> retorno = new ArrayList<>();
-        venda.forEach(result -> {
-            retorno.add(new VendaResumoDTO(result.getId(), result.getDataVenda(), result.getValorTotal(), result.getStatus(), result.getSituacao(), result.getCliente().getNome()));
-        });
 
-        return  retorno;
+        return  venda;
     }
 
     public Optional<VendaDTO> buscarPorId(Integer id){

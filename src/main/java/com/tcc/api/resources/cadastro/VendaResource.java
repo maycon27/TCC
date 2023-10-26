@@ -49,6 +49,12 @@ public class VendaResource implements VendaSwagger {
         return service.consultarVendas();
     }
 
+    @GetMapping("consultarColetar")
+    public List<VendaResuminda> consultarColetar(){
+        return service.consultarVendasColetar();
+    }
+
+
 
     @PostMapping
     public ResponseEntity<VendaDTO> salvar(@Valid @RequestBody VendaDTO dto, HttpServletResponse response) {
