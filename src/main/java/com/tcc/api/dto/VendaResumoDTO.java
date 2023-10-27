@@ -28,6 +28,17 @@ public class VendaResumoDTO {
 
     private String nomeEstabelecimento;
 
+
+    public VendaResumoDTO(Integer id, LocalDate dataVenda, BigDecimal valorTotal, StatusVenda status, SituacaoVenda situacao,
+                          String nomeCliente) {
+        this.id = id;
+        this.dataVenda = dataVenda;
+        this.valorTotal = valorTotal;
+        this.status = status;
+        this.situacao = situacao;
+        this.nomeCliente = nomeCliente;
+    }
+
     public VendaResumoDTO(Integer id, LocalDate dataVenda, BigDecimal valorTotal, StatusVenda status, SituacaoVenda situacao,
                           String nomeCliente, String nomeProduto, String nomeEstabelecimento) {
         this.id = id;
