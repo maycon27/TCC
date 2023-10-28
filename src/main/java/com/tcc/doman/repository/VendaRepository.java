@@ -17,6 +17,7 @@ public interface VendaRepository extends JpaRepository<Venda,Integer>, VendaQuer
             " LEFT JOIN Produto p ON (iv.produto.id = p.id) " +
             " LEFT JOIN Estabelecimento e ON (iv.produto.estabelecimento.id = e.id) " +
             " LEFT JOIN Cliente c ON (c.id = v.cliente.id) " +
+            " WHERE c.id = :idCliente " +
             " group by v.id, v.dataVenda, v.valorTotal,  v.situacao, c.nome, e.nome, p.nome " +
             " ORDER BY v.id")
     List<VendaResumoDTO> findVendaByClienteId(Integer idCliente);
